@@ -25,7 +25,10 @@
     "ios": {
       "supportsTablet": true,
       "buildNumber": "0.3.0",
-      "bundleIdentifier": "com.puente.collect"
+      "bundleIdentifier": "com.puente.collect",
+      "infoPlist":{
+        "NSCameraUsageDescription": "Would you like to allow Puente access to your camera roll?"
+      }
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

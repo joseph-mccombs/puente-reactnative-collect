@@ -5,7 +5,6 @@ import {
 
 import { theme } from '../../modules/theme';
 
-
 export default function DataAnalysis() {
   return (
     <View style={styles.container}>

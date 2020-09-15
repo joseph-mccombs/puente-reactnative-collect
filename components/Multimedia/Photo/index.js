@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper'
+import {
+  Text, View, TouchableOpacity, Image, StyleSheet
+} from 'react-native';
+import { Button } from 'react-native-paper';
 import { Camera } from 'expo-camera';
 
 export default function UseCamera({ formikProps, formikKey }) {
@@ -8,20 +10,20 @@ export default function UseCamera({ formikProps, formikKey }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [zoom, setZoom] = useState(0);
-  let camera = useRef(null)
+  let camera = useRef(null);
 
   const takePicture = async () => {
     if (camera) {
-      let photo = await camera.takePictureAsync();
-      setImage(photo.uri)
+      const photo = await camera.takePictureAsync();
+      setImage(photo.uri);
       formikProps.setFieldValue(formikKey, photo.uri);
     }
-  }
+  };
 
   const resetPicture = () => {
     setImage(null);
     formikProps.setFieldValue(formikKey, null);
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -44,58 +46,66 @@ export default function UseCamera({ formikProps, formikKey }) {
           <Button onPress={resetPicture}>Retake Picture</Button>
         </>
       ) : (
-          <>
-            <Camera style={{ flex: 3 }} type={type} ref={(ref) => {
+        <>
+          <Camera
+            style={{ flex: 3 }}
+            type={type}
+            ref={(ref) => {
               camera = ref;
             }}
-              autofocus={true}
-              zoom={zoom}
+            autofocus
+            zoom={zoom}
+          >
+            <View
+              style={styles.cameraButtonContainer}
             >
-              <View
-                style={styles.cameraButtonContainer}>
-                <TouchableOpacity
-                  style={styles.flipContainer}
-                  onPress={() => {
-                    setType(
-                      type === Camera.Constants.Type.back
-                        ? Camera.Constants.Type.front
-                        : Camera.Constants.Type.back
-                    );
-                  }}>
-                  <Text style={styles.cameraButtonText}> Flip </Text>
-                </TouchableOpacity>
-                <View style={styles.cameraButtonContainer}>
-                  <View style={styles.zoomContainer}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setZoom(
-                          zoom === .4
-                            ? zoom
-                            : zoom + .1)
-                      }}>
-                      <Text style={styles.cameraButtonText}> + </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setZoom(
-                          zoom === 0
-                            ? zoom
-                            : zoom - .1)
-                      }}>
-                      <Text style={styles.cameraButtonText}> - </Text>
-                    </TouchableOpacity>
-                  </View>
+              <TouchableOpacity
+                style={styles.flipContainer}
+                onPress={() => {
+                  setType(
+                    type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back
+                  );
+                }}
+              >
+                <Text style={styles.cameraButtonText}> Flip </Text>
+              </TouchableOpacity>
+              <View style={styles.cameraButtonContainer}>
+                <View style={styles.zoomContainer}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setZoom(
+                        zoom === 0.4
+                          ? zoom
+                          : zoom + 0.1
+                      );
+                    }}
+                  >
+                    <Text style={styles.cameraButtonText}> + </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setZoom(
+                        zoom === 0
+                          ? zoom
+                          : zoom - 0.1
+                      );
+                    }}
+                  >
+                    <Text style={styles.cameraButtonText}> - </Text>
+                  </TouchableOpacity>
                 </View>
               </View>
-            </Camera>
-            <Button onPress={takePicture}>Take Picture</Button>
-          </>
-        )}
+            </View>
+          </Camera>
+          <Button onPress={takePicture}>Take Picture</Button>
+        </>
+      )}
 
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   cameraButtonContainer: {
@@ -120,4 +130,4 @@ const styles = StyleSheet.create({
     color: 'white',
     marginRight: 10
   }
-})
+});

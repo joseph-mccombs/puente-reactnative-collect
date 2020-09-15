@@ -1,57 +1,61 @@
-import * as React from 'react';
-import { Button, Image, View, Platform } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
+// THIS WAS IM WORKING STATE MINUS LINTING ISSUES
+// WILL NEED TO BE ALTERED TO FIT OUR NEEDS
+// COMMENTED OUT FOR NOW...
 
-// started this, it is not complete but it is in a working state
-export default class ImagePickerExample extends React.Component {
-  state = {
-    image: null,
-    cameraPermission: ''
-  };
+// import * as React from 'react';
+// import {
+//   Button, Image, View, Platform
+// } from 'react-native';
+// import * as ImagePicker from 'expo-image-picker';
+// import * as Permissions from 'expo-permissions';
 
-  render() {
-    let { image } = this.state;
+// export default class ImagePickerExample extends React.Component {
+//   state = {
+//     image: null,
+//     cameraPermission: ''
+//   };
 
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button title="Pick an image from camera roll" onPress={this._pickImage} />
-        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-      </View>
-    );
-  }
+//   render() {
+//     const { image } = this.state;
 
-  // componentDidMount() {
-  //   this.getPermissionAsync();
-  // }
+//     return (
+//       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//         <Button title="Pick an image from camera roll" onPress={this._pickImage} />
+//         {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+//       </View>
+//     );
+//   }
 
-  getPermissionAsync = async () => {
-    if (Platform.OS !== 'web') {
-      const { permission } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      this.setState({ 'cameraPermission': permission })
-      console.log(this.state)
-      if (this.state.cameraPermission !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-      }
-    }
-  };
+//   // componentDidMount() {
+//   //   this.getPermissionAsync();
+//   // }
 
-  _pickImage = async () => {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        this.setState({ image: result.uri });
-      }
+//   getPermissionAsync = async () => {
+//     if (Platform.OS !== 'web') {
+//       const { permission } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+//       this.setState({ cameraPermission: permission });
+//       console.log(this.state);
+//       if (this.state.cameraPermission !== 'granted') {
+//         alert('Sorry, we need camera roll permissions to make this work!');
+//       }
+//     }
+//   };
 
-      console.log(result);
-    } catch (E) {
-      console.log(E);
-    }
-  };
-}
+//   _pickImage = async () => {
+//     try {
+//       const result = await ImagePicker.launchImageLibraryAsync({
+//         mediaTypes: ImagePicker.MediaTypeOptions.All,
+//         allowsEditing: true,
+//         aspect: [4, 3],
+//         quality: 1,
+//       });
+//       if (!result.cancelled) {
+//         this.setState({ image: result.uri });
+//       }
+
+//       console.log(result);
+//     } catch (E) {
+//       console.log(E);
+//     }
+//   };
+// }

@@ -8,8 +8,7 @@ import AutoFill from '../AutoFill';
 
 import getLocation from '../../../modules/geolocation';
 import { theme } from '../../../modules/theme';
-import UseCamera from '../../Multimedia/Photo'
-
+import UseCamera from '../../Multimedia/Photo';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, ...rest

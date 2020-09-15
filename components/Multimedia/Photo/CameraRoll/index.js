@@ -4,6 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
+// started this, it is not complete but it is in a working state
 export default class ImagePickerExample extends React.Component {
   state = {
     image: null,
@@ -37,23 +38,20 @@ export default class ImagePickerExample extends React.Component {
   };
 
   _pickImage = async () => {
-    this.getPermissionAsync();
-    if (this.state.cameraPermission === 'granted') {
-      try {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
-        });
-        if (!result.cancelled) {
-          this.setState({ image: result.uri });
-        }
-
-        console.log(result);
-      } catch (E) {
-        console.log(E);
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        this.setState({ image: result.uri });
       }
+
+      console.log(result);
+    } catch (E) {
+      console.log(E);
     }
   };
 }

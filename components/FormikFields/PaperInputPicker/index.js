@@ -9,6 +9,7 @@ import AutoFill from '../AutoFill';
 
 import getLocation from '../../../modules/geolocation';
 import theme from '../../../modules/theme';
+import UseCamera from '../../Multimedia/Photo'
 
 const PaperInputPicker = ({ data, formikProps, ...rest }) => {
   const { label, formikKey, fieldType } = data;
@@ -75,6 +76,14 @@ const PaperInputPicker = ({ data, formikProps, ...rest }) => {
           <Button mode="contained" onPress={() => setFieldValue(formikKey, handleLocation())}>
             <Text>{location}</Text>
           </Button>
+        </View>
+      )}
+      {fieldType === 'photo' && (
+        <View>
+          <UseCamera
+            formikProps={formikProps}
+            formikKey={formikKey}
+          />
         </View>
       )}
     </>

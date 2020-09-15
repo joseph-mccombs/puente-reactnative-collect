@@ -4,13 +4,13 @@ import {
 } from 'react-native';
 
 import theme from '../../modules/theme';
-import ImagePickerExample from '../../components/Multimedia/Photo/CameraRoll'
+import UseCamera from '../../components/Multimedia/Photo'
 
 export default function DataAnalysis() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome to the data analysis page.</Text>
-      <ImagePickerExample />
+      <UseCamera style={styles.useCamera}/>
     </View>
   );
 }

@@ -139,6 +139,11 @@ const configArray = [
     value: 0,
     fieldType: 'geolocation'
   },
+  {
+    formikKey: 'test',
+    value: '',
+    fieldType: 'photo',
+  }
   // {
   //   label: "Surveying User",
   //   formikKey: 'surveyingUser',

@@ -37,7 +37,7 @@ export default function UseCamera({ formikProps, formikKey }) {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={{ flex: 8 }}>
+    <View style={{ flex: 3, padding: 16, }}>
       {image ? (
         <>
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
@@ -45,7 +45,7 @@ export default function UseCamera({ formikProps, formikKey }) {
         </>
       ) : (
           <>
-            <Camera style={{ flex: 5 }} type={type} ref={(ref) => {
+            <Camera style={{ flex: 3 }} type={type} ref={(ref) => {
               camera = ref;
             }}
               autofocus={true}

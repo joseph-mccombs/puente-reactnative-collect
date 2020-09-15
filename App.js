@@ -9,7 +9,7 @@ import MainNavigation from './components/MainNavigation';
 import configureStore from './modules/state-management/configure-store';
 
 // STYLING
-import theme from './modules/theme';
+import { theme } from './modules/theme';
 
 const store = configureStore();
 

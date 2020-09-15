@@ -2,8 +2,8 @@ import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { Formik } from 'formik';
-import FormInput from '../../../components/FormikFields/FormInput';
-import { storeData } from '../../../modules/async-storage';
+import FormInput from '../../../../components/FormikFields/FormInput';
+import { storeData } from '../../../../modules/async-storage';
 
 const StorePinCode = ({ navigation }) => (
   <Formik

@@ -17,16 +17,16 @@ import {
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import * as Network from 'expo-network';
-import { retrieveSignInFunction } from '../../services/parse/auth';
-import FormInput from '../../components/FormikFields/FormInput';
-import LanguagePicker from '../../components/LanguagePicker';
+import { retrieveSignInFunction } from '../../../services/parse/auth';
+import FormInput from '../../../components/FormikFields/FormInput';
+import LanguagePicker from '../../../components/LanguagePicker';
 import CredentialsModal from './CredentialsModal';
-import { storeData, getData, deleteData } from '../../modules/async-storage';
+import { storeData, getData, deleteData } from '../../../modules/async-storage';
 
-import I18n from '../../modules/i18n';
+import I18n from '../../../modules/i18n';
 
 // STYLING
-import theme from '../../modules/theme';
+import { theme } from '../../../modules/theme';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -119,8 +119,9 @@ const SignIn = ({ navigation }) => {
                       handleSaveCredentials(values);
                     });
                   navigation.navigate('Root');
-                }, () => {
-                  // error on sign in => some sort of alert
+                }, (error) => {
+                  // eslint-disable-next-line
+                  console.log(error)
                 });
             } else {
               // offline

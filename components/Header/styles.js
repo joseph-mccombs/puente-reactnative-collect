@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import theme from '../../modules/theme';
+import { theme } from '../../modules/theme';
 
 const borderRadius = 20;
 
@@ -7,11 +7,10 @@ const { accent, black } = theme.colors;
 
 const styles = StyleSheet.create({
   header: {
-    flex: 1,
+    height: 80, // equivalent to flex: 0.2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    height: 80,
     borderBottomRightRadius: borderRadius,
     borderBottomLeftRadius: borderRadius,
     backgroundColor: accent

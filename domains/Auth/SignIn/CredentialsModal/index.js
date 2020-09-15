@@ -5,7 +5,7 @@ import {
 } from 'react-native-paper';
 
 // STYLING
-import theme from '../../../modules/theme';
+import { theme } from '../../../../modules/theme';
 
 export default function CredentialsModal(props) {
   const {

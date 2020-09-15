@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { Formik } from 'formik';
-import FormInput from '../../../components/FormikFields/FormInput';
-import { getData, deleteData } from '../../../modules/async-storage';
-import { retrieveSignInFunction } from '../../../services/parse/auth';
+import FormInput from '../../../../components/FormikFields/FormInput';
+import { getData, deleteData } from '../../../../modules/async-storage';
+import { retrieveSignInFunction } from '../../../../services/parse/auth';
 
 const GetPinCode = ({ navigation }) => {
   const [failedAttempts, setFailedAttempts] = useState(1);

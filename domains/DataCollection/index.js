@@ -1,25 +1,61 @@
-import * as React from 'react';
+// import * as React from 'react';
+import React, { useState } from 'react';
 import {
-  StyleSheet, Text, ScrollView
+  Text, ScrollView, View
 } from 'react-native';
+
+import {
+  Button
+} from 'react-native-paper';
+
+import { layout } from '../../modules/theme';
+
+import Header from '../../components/Header';
 
 import Forms from './Forms';
 
-export default function DataCollection({ navigation }) {
-  return (
-    <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
-      <Text style={styles.line}>Welcome to the data collection page.</Text>
-      <Forms style={styles.line} navigation={navigation} />
-    </ScrollView>
-  );
-}
+const DataCollection = ({ navigation }) => {
+  const [scrollViewScroll, setScrollViewScroll] = useState();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 0.5,
-  },
-  line: {
-    flex: 0.5,
-    padding: 10,
-  }
-});
+  const [showForms, setShowForms] = React.useState(false);
+  const [selectForm, setSelectForm] = React.useState('id');
+
+  return (
+    <View
+      style={layout.screenContainer}
+      onStartShouldSetResponderCapture={() => {
+        setScrollViewScroll(true);
+      }}
+    >
+      <Header />
+
+      <ScrollView keyboardShouldPersistTaps="always" scrollEnabled={scrollViewScroll}>
+        {!showForms
+          && (
+            <View>
+              <Text style={layout.line} onPress={() => setShowForms(true)}>New Record</Text>
+              <Text style={layout.line}>Find Record</Text>
+              <Text style={layout.line}>New Asset</Text>
+              <Text style={layout.line}>Find Asset</Text>
+            </View>
+          )}
+        {showForms
+          && (
+            <View>
+              <Button onPress={() => setShowForms(false)}>Back to Data Collection Screen</Button>
+              <Forms
+                style={layout.line}
+                navigation={navigation}
+                selectedForm={selectForm}
+                setSelectedForm={setSelectForm}
+                scrollViewScroll={scrollViewScroll}
+                setScrollViewScroll={setScrollViewScroll}
+              />
+            </View>
+          )}
+      </ScrollView>
+    </View>
+  );
+};
+
+export default DataCollection;

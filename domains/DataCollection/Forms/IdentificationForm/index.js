@@ -14,12 +14,12 @@ import {
 } from '../../../../modules/async-storage';
 import checkOnlineStatus from '../../../../modules/offline';
 import generateRandomID from '../../../../modules/utils';
+import { layout } from '../../../../modules/theme';
 
 import backgroundPostPatient from './utils';
-import configArray from './utils/config';
+import configArray from './config/config';
 
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
-import styles from '../../../../styles/layout/form';
 
 // const validationSchema = yup.object().shape({
 //   fname: yup
@@ -32,7 +32,9 @@ import styles from '../../../../styles/layout/form';
 //     .required()
 // });
 
-const IdentificationForm = ({ navigation }) => {
+const IdentificationForm = ({
+  navigation, scrollViewScroll, setScrollViewScroll, setSelectedForm
+}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       backgroundPostPatient();
@@ -42,7 +44,7 @@ const IdentificationForm = ({ navigation }) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [backgroundPostPatient, clearInterval]);
 
   const toRoot = () => {
     navigation.navigate('Root');
@@ -53,7 +55,7 @@ const IdentificationForm = ({ navigation }) => {
 
   useEffect(() => {
     setInputs(configArray);
-  }, []);
+  }, [setInputs, configArray]);
 
   return (
     <Formik
@@ -72,12 +74,13 @@ const IdentificationForm = ({ navigation }) => {
             postObjectsToClass(postParams)
               .then(() => {
                 toRoot(); // This does nothing because we're already at root
+                setSelectedForm('');
               }, () => {
               });
           } else {
             const id = `PatientID-${generateRandomID()}`;
             storeData(postParams, id);
-            // console.log(id, 'Stored to ASYNC');
+            setSelectedForm('');
           }
         });
         setTimeout(() => {
@@ -87,12 +90,14 @@ const IdentificationForm = ({ navigation }) => {
     // validationSchema={validationSchema}
     >
       {(formikProps) => (
-        <View style={styles.formContainer}>
+        <View style={layout.formContainer}>
           {inputs.length && inputs.map((result) => (
             <View key={result.formikKey}>
               <PaperInputPicker
                 data={result}
                 formikProps={formikProps}
+                scrollViewScroll={scrollViewScroll}
+                setScrollViewScroll={setScrollViewScroll}
               // placeholder="Ana"
               />
             </View>

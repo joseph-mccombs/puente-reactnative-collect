@@ -1,17 +1,19 @@
 import * as React from 'react';
 import {
-  View,
-  Text
+  View, Text
 } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button, Title } from 'react-native-paper';
 
 import AutoFill from '../AutoFill';
 
 import getLocation from '../../../modules/geolocation';
-import theme from '../../../modules/theme';
+import { theme } from '../../../modules/theme';
 import UseCamera from '../../Multimedia/Photo'
 
-const PaperInputPicker = ({ data, formikProps, ...rest }) => {
+
+const PaperInputPicker = ({
+  data, formikProps, scrollViewScroll, setScrollViewScroll, ...rest
+}) => {
   const { label, formikKey, fieldType } = data;
   const {
     handleChange, handleBlur, touched, errors, setFieldValue
@@ -55,6 +57,7 @@ const PaperInputPicker = ({ data, formikProps, ...rest }) => {
       )}
       {fieldType === 'select' && (
         <View>
+          <Title>{label}</Title>
           {data.options.map((result) => (
             <Button key={result} mode="outlined" onPress={() => setFieldValue(formikKey, result)}>
               <Text>{result}</Text>
@@ -68,6 +71,8 @@ const PaperInputPicker = ({ data, formikProps, ...rest }) => {
             parameter={data.parameter}
             formikProps={formikProps}
             formikKey={formikKey}
+            scrollViewScroll={scrollViewScroll}
+            setScrollViewScroll={setScrollViewScroll}
           />
         </View>
       )}

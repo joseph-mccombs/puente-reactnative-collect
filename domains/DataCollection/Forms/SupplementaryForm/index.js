@@ -6,23 +6,16 @@ import {
 } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { Formik } from 'formik';
-// import * as yup from 'yup';
+
 import { postObjectsToClass } from '../../../../services/parse/crud';
+
+import { layout } from '../../../../modules/theme';
+
+import envArray from './configs/envhealth.config';
+
 import PaperInputPicker from '../../../../components/FormikFields/PaperInputPicker';
-import envArray from './forms-configs/envhealth.config';
 
-// const validationSchema = yup.object().shape({
-//   fname: yup
-//     .string()
-//     .label('First Name')
-//     .required(),
-//   lname: yup
-//     .string()
-//     .label('Last Name')
-//     .required()
-// });
-
-const SupplementaryForm = ({ navigation }) => {
+const SupplementaryForm = ({ navigation, selectedForm, setSelectedForm }) => {
   const toRoot = () => {
     navigation.navigate('Root');
   };
@@ -31,8 +24,8 @@ const SupplementaryForm = ({ navigation }) => {
   const [photoFile, setPhotoFile] = useState('State Photo String');
 
   useEffect(() => {
-    setInputs(envArray);
-  }, []);
+    if (selectedForm === 'env') setInputs(envArray);
+  }, [selectedForm, envArray]);
 
   return (
     <Formik
@@ -49,6 +42,7 @@ const SupplementaryForm = ({ navigation }) => {
         postObjectsToClass(postParams)
           .then(() => {
             toRoot(); // This does nothing because we're already at root
+            setSelectedForm('');
           }, () => {
           });
         setTimeout(() => {
@@ -58,13 +52,12 @@ const SupplementaryForm = ({ navigation }) => {
     // validationSchema={validationSchema}
     >
       {(formikProps) => (
-        <>
+        <View style={layout.formContainer}>
           {inputs.length && inputs.map((result) => (
             <View key={result.formikKey}>
               <PaperInputPicker
                 data={result}
                 formikProps={formikProps}
-              // placeholder="Ana"
               />
             </View>
           ))}
@@ -76,7 +69,7 @@ const SupplementaryForm = ({ navigation }) => {
               <Text>Submit</Text>
             </Button>
           )}
-        </>
+        </View>
       )}
     </Formik>
   );

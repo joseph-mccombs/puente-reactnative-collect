@@ -11,14 +11,14 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { retrieveSignUpFunction, retrieveSignInFunction } from '../../services/parse/auth';
+import { retrieveSignUpFunction, retrieveSignInFunction } from '../../../services/parse/auth';
 
-import FormInput from '../../components/FormikFields/FormInput';
-import TermsModal from '../../components/TermsModal';
+import FormInput from '../../../components/FormikFields/FormInput';
+import TermsModal from '../../../components/TermsModal';
 // STYLING
-import theme from '../../modules/theme';
+import { theme } from '../../../modules/theme';
 
-import I18n from '../../modules/i18n';
+import I18n from '../../../modules/i18n';
 
 const validationSchema = yup.object().shape({
   firstname: yup

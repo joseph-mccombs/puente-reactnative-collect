@@ -19,6 +19,7 @@ const PaperInputPicker = ({
   } = formikProps;
 
   const [location, setLocation] = React.useState();
+  const [camera, setCamera] = React.useState(false);
 
   const handleLocation = async () => {
     const currentLocation = await getLocation();
@@ -84,10 +85,15 @@ const PaperInputPicker = ({
       )}
       {fieldType === 'photo' && (
         <View>
-          <UseCamera
-            formikProps={formikProps}
-            formikKey={formikKey}
-          />
+          {camera ? (
+            <UseCamera
+              formikProps={formikProps}
+              formikKey={formikKey}
+            />
+          )
+            : (
+              <Button mode="outlined" onPress={() => setCamera(true)}>Take Photo</Button>
+            )}
         </View>
       )}
     </>

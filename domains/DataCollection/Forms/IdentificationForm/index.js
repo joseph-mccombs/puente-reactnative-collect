@@ -61,7 +61,8 @@ const IdentificationForm = ({
     <Formik
       initialValues={{}}
       onSubmit={(values, actions) => {
-        setPhotoFile('Submitted Photo String');
+        setPhotoFile(values.test);
+        // picture file key is test for now...
         const postParams = {
           parseClass: 'SurveyData',
           signature: 'Sample Signature',

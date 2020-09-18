@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
 
-import styles from './styles';
+import styles from './index.styles';
 
 const Header = () => {
   const { header, headerText, headerIcon } = styles;
@@ -23,7 +23,6 @@ const Header = () => {
           size={30}
         />
       </View>
-
     </View>
   );
 };

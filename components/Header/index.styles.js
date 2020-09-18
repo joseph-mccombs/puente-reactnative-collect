@@ -8,6 +8,7 @@ const { accent, black } = theme.colors;
 const styles = StyleSheet.create({
   header: {
     height: 80, // equivalent to flex: 0.2,
+    paddingTop: 20, // for ios
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',

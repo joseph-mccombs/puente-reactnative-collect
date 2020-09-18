@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.4.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v5.3.0...v5.4.0) (2020-09-17)
+
+
+### Bug Fixes
+
+* jest testing ([9549a72](https://github.com/hopetambala/puente-reactnative-collect/commit/9549a72870f906a80dce82e0d40ed17e2b9630d0))
+
+## [5.1.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v0.3.0...v5.1.0) (2020-09-17)
+
+
+### Features
+
+* big re-do of styling for application for custom header ([bef7951](https://github.com/hopetambala/puente-reactnative-collect/commit/bef79511bf0d5a852f9d5c2d2c9d22ae30e0f0c1))
+
+
+### Bug Fixes
+
+* add key to flatlist of autocomplete ([6d13175](https://github.com/hopetambala/puente-reactnative-collect/commit/6d13175cae41fef5dd30f071013dca650292d8f1))
+* **deps:** pin dependency expo-network to 2.1.1 ([fa69498](https://github.com/hopetambala/puente-reactnative-collect/commit/fa69498df883453a34ba36d0bbcfed04acf743ca))
+
 ## [0.3.0](https://github.com/hopetambala/puente-reactnative-collect/compare/v0.2.0...v0.3.0) (2020-09-05)
 
 

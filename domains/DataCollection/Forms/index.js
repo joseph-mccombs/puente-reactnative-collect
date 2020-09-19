@@ -9,8 +9,10 @@ import { layout } from '../../../modules/theme';
 
 const Forms = (props) => {
   const {
-    navigation, selectedForm, setSelectedForm, scrollViewScroll, setScrollViewScroll
+    navigation, scrollViewScroll, setScrollViewScroll
   } = props;
+  const [selectedForm, setSelectedForm] = React.useState('id');
+
   return (
     <View style={layout.screenContainer}>
       {selectedForm === 'id' && (

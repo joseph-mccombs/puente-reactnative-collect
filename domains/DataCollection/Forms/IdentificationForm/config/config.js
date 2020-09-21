@@ -140,7 +140,7 @@ const configArray = [
     fieldType: 'geolocation'
   },
   {
-    formikKey: 'test',
+    formikKey: 'photo',
     value: '',
     fieldType: 'photo',
   }

@@ -56,7 +56,7 @@ const IdentificationForm = ({
     <Formik
       initialValues={{}}
       onSubmit={(values, actions) => {
-        setPhotoFile('Submitted Photo String');
+        setPhotoFile(values.photo);
 
         const submitAction = () => {
           setTimeout(() => {
@@ -64,17 +64,23 @@ const IdentificationForm = ({
             actions.setSubmitting(false);
           }, 1000);
         };
-
+        // const test = values.test.split('Camera/')
+        // // 'data:image/jpeg;base64,' +
+        // const image = values.test;
+        const photo = values.photo
+        delete values.photo
         const postParams = {
           parseClass: 'SurveyData',
           signature: 'Sample Signature',
-          photoFile,
+          photoFile: photo,
           localObject: values
         };
+        console.log("PostParams: ", postParams)
 
         checkOnlineStatus().then((connected) => {
           if (connected) {
             postObjectsToClass(postParams).then(() => {
+              console.log("success", postParams)
               submitAction();
             });
           } else {

@@ -14,9 +14,11 @@ export default function UseCamera({ formikProps, formikKey }) {
 
   const takePicture = async () => {
     if (camera) {
-      const photo = await camera.takePictureAsync();
+      const photo = await camera.takePictureAsync({ base64: true });
+      console.log(photo)
+      // uri is used to view the photo in the app, base64 used to save in parse
       setImage(photo.uri);
-      formikProps.setFieldValue(formikKey, photo.uri);
+      formikProps.setFieldValue(formikKey, photo.base64);
     }
   };
 
@@ -46,62 +48,63 @@ export default function UseCamera({ formikProps, formikKey }) {
           <Button onPress={resetPicture}>Retake Picture</Button>
         </>
       ) : (
-        <>
-          <Camera
-            style={{ flex: 3 }}
-            type={type}
-            ref={(ref) => {
-              camera = ref;
-            }}
-            autofocus
-            zoom={zoom}
-          >
-            <View
-              style={styles.cameraButtonContainer}
+          <>
+            <Camera
+              style={{ flex: 3 }}
+              type={type}
+              ref={(ref) => {
+                camera = ref;
+              }}
+              base64={true}
+              autofocus
+              zoom={zoom}
             >
-              <TouchableOpacity
-                style={styles.flipContainer}
-                onPress={() => {
-                  setType(
-                    type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back
-                  );
-                }}
+              <View
+                style={styles.cameraButtonContainer}
               >
-                <Text style={styles.cameraButtonText}> Flip </Text>
-              </TouchableOpacity>
-              <View style={styles.cameraButtonContainer}>
-                <View style={styles.zoomContainer}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setZoom(
-                        zoom === 0.4
-                          ? zoom
-                          : zoom + 0.1
-                      );
-                    }}
-                  >
-                    <Text style={styles.cameraButtonText}> + </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setZoom(
-                        zoom === 0
-                          ? zoom
-                          : zoom - 0.1
-                      );
-                    }}
-                  >
-                    <Text style={styles.cameraButtonText}> - </Text>
-                  </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.flipContainer}
+                  onPress={() => {
+                    setType(
+                      type === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back
+                    );
+                  }}
+                >
+                  <Text style={styles.cameraButtonText}> Flip </Text>
+                </TouchableOpacity>
+                <View style={styles.cameraButtonContainer}>
+                  <View style={styles.zoomContainer}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setZoom(
+                          zoom === 0.4
+                            ? zoom
+                            : zoom + 0.1
+                        );
+                      }}
+                    >
+                      <Text style={styles.cameraButtonText}> + </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setZoom(
+                          zoom === 0
+                            ? zoom
+                            : zoom - 0.1
+                        );
+                      }}
+                    >
+                      <Text style={styles.cameraButtonText}> - </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
-            </View>
-          </Camera>
-          <Button onPress={takePicture}>Take Picture</Button>
-        </>
-      )}
+            </Camera>
+            <Button onPress={takePicture}>Take Picture</Button>
+          </>
+        )}
 
     </View>
   );

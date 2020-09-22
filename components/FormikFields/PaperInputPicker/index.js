@@ -22,7 +22,6 @@ const PaperInputPicker = ({
   const [valuesBeforeCamera, setValuesBeforeCamera] = React.useState();
 
   React.useEffect(() => {
-    console.log(values);
     setValuesBeforeCamera(values);
   });
 
@@ -51,8 +50,10 @@ const PaperInputPicker = ({
 
   return (
     <>
-      {/* fields only show when the camera is not open, if values have been defined prior to using the camera
-    the values NEED to be passed to the TextInput, Autofilll, --** SELECT AND GEOLAOCATION NEED TO BE FIGURED OUT -- ** */}
+      {/* fields only show when the camera is not open, if values have been
+      defined prior to using the camera the values NEED to be passed to the
+      TextInput, Autofilll, --** SELECT AND GEOLAOCATION NEED TO BE FIGURED OUT
+      -- ** */}
       {fieldType === 'input' && camera === false && (
         <View>
           {valuesBeforeCamera && valuesBeforeCamera[formikKey] ? (

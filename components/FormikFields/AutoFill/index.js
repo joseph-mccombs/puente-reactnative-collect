@@ -44,8 +44,9 @@ export default class AutoFill extends Component {
     const {
       parameter, formikProps, formikKey, scrollViewScroll, setScrollViewScroll, cameraValue
     } = this.props;
-    const query = cameraValue || this.state.query;
-    const fields = this.findField(query);
+    const { query } = this.state;
+    const queryVal = cameraValue || query;
+    const fields = this.findField(queryVal);
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
     const placeholder = `Enter the ${parameter} here`;
 
@@ -56,9 +57,9 @@ export default class AutoFill extends Component {
           autoCorrect={false}
           containerStyle={styles.autocompleteContainer}
           // data to show in suggestion
-          data={fields.length === 1 && comp(query, fields[0]) ? [] : fields}
+          data={fields.length === 1 && comp(queryVal, fields[0]) ? [] : fields}
           // default value if you want to set something in input
-          defaultValue={query}
+          defaultValue={queryVal}
           /* onchange of the text changing the state of the query which will trigger
           the findFilm method to show the suggestions */
           onChangeText={(text) => {
@@ -92,7 +93,7 @@ export default class AutoFill extends Component {
         />
         <View style={styles.descriptionContainer}>
           {fields.length > 0 ? (
-            <Text style={styles.infoText}>{query}</Text>
+            <Text style={styles.infoText}>{queryVal}</Text>
           ) : (
             <Text style={styles.infoText}>{placeholder}</Text>
           )}

@@ -46,7 +46,6 @@ const IdentificationForm = ({
   }, [clearInterval]);
 
   const [inputs, setInputs] = useState({});
-  const [photoFile, setPhotoFile] = useState('State Photo String');
   const [camera, setCamera] = React.useState(false);
 
   useEffect(() => {
@@ -58,31 +57,25 @@ const IdentificationForm = ({
       <Formik
         initialValues={{}}
         onSubmit={(values, actions) => {
-          setPhotoFile(values.photo);
-
           const submitAction = () => {
             setTimeout(() => {
               setSelectedForm('');
               actions.setSubmitting(false);
             }, 1000);
           };
-          // const test = values.test.split('Camera/')
-          // // 'data:image/jpeg;base64,' +
-          // const image = values.test;
+
           const { photo } = values;
-          delete values.photo;
+          delete values.photo; // eslint-disable-line
           const postParams = {
             parseClass: 'SurveyData',
             signature: 'Sample Signature',
             photoFile: photo,
             localObject: values
           };
-          console.log('PostParams: ', postParams);
 
           checkOnlineStatus().then((connected) => {
             if (connected) {
               postObjectsToClass(postParams).then(() => {
-                console.log('success', postParams);
                 submitAction();
               });
             } else {

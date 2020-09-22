@@ -41,12 +41,12 @@ export default class AutoFill extends Component {
   }
 
   render() {
-    const { query } = this.state;
+    const {
+      parameter, formikProps, formikKey, scrollViewScroll, setScrollViewScroll, cameraValue
+    } = this.props;
+    const query = cameraValue || this.state.query;
     const fields = this.findField(query);
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
-    const {
-      parameter, formikProps, formikKey, scrollViewScroll, setScrollViewScroll
-    } = this.props;
     const placeholder = `Enter the ${parameter} here`;
 
     return (

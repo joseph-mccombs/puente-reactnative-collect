@@ -11,7 +11,7 @@ import { theme } from '../../../modules/theme';
 import UseCamera from '../../Multimedia/Photo';
 
 const PaperInputPicker = ({
-  data, formikProps, scrollViewScroll, setScrollViewScroll, ...rest
+  data, formikProps, scrollViewScroll, setScrollViewScroll, camera, setCamera, values, ...rest
 }) => {
   const { label, formikKey, fieldType } = data;
   const {
@@ -19,7 +19,16 @@ const PaperInputPicker = ({
   } = formikProps;
 
   const [location, setLocation] = React.useState();
-  const [camera, setCamera] = React.useState(false);
+  const [valuesBeforeCamera, setValuesBeforeCamera] = React.useState();
+
+  React.useEffect(() => {
+    console.log(values);
+    setValuesBeforeCamera(values);
+  });
+
+  const changeToCamera = () => {
+    setCamera(true);
+  };
 
   const handleLocation = async () => {
     const currentLocation = await getLocation();
@@ -42,47 +51,98 @@ const PaperInputPicker = ({
 
   return (
     <>
-      {fieldType === 'input' && (
+      {/* fields only show when the camera is not open, if values have been defined prior to using the camera
+    the values NEED to be passed to the TextInput, Autofilll, --** SELECT AND GEOLAOCATION NEED TO BE FIGURED OUT -- ** */}
+      {fieldType === 'input' && camera === false && (
         <View>
-          <TextInput
-            label={label}
-            onChangeText={handleChange(formikKey)}
-            onBlur={handleBlur(formikKey)}
-            {...rest} //eslint-disable-line
-            mode="outlined"
-            theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
-          />
-          <Text style={{ color: 'red' }}>
-            {touched[formikKey] && errors[formikKey]}
-          </Text>
+          {valuesBeforeCamera && valuesBeforeCamera[formikKey] ? (
+            <View>
+              <TextInput
+                label={label}
+                onChangeText={handleChange(formikKey)}
+                onBlur={handleBlur(formikKey)}
+                value={valuesBeforeCamera[formikKey]}
+                {...rest} //eslint-disable-line
+                mode="outlined"
+                theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
+              />
+              <Text style={{ color: 'red' }}>
+                {touched[formikKey] && errors[formikKey]}
+              </Text>
+            </View>
+          ) : (
+            <View>
+              <TextInput
+                label={label}
+                onChangeText={handleChange(formikKey)}
+                onBlur={handleBlur(formikKey)}
+                  {...rest} //eslint-disable-line
+                mode="outlined"
+                theme={{ colors: { placeholder: theme.colors.primary }, text: 'black' }}
+              />
+              <Text style={{ color: 'red' }}>
+                {touched[formikKey] && errors[formikKey]}
+              </Text>
+            </View>
+          )}
         </View>
       )}
-      {fieldType === 'select' && (
+      {fieldType === 'select' && camera === false && (
         <View>
-          <Title>{label}</Title>
-          {data.options.map((result) => (
-            <Button key={result} mode="outlined" onPress={() => setFieldValue(formikKey, result)}>
-              <Text>{result}</Text>
+          {valuesBeforeCamera && valuesBeforeCamera[formikKey] ? (
+            <View>
+              <Title>{label}</Title>
+              {data.options.map((result) => (
+                <Button key={result} mode="outlined" onPress={() => setFieldValue(formikKey, result)}>
+                  <Text>{result}</Text>
+                </Button>
+              ))}
+            </View>
+          ) : (
+            <View>
+              <Title>{label}</Title>
+              {data.options.map((result) => (
+                <Button key={result} mode="outlined" onPress={() => setFieldValue(formikKey, result)}>
+                  <Text>{result}</Text>
+                </Button>
+              ))}
+            </View>
+          )}
+        </View>
+      )}
+      {fieldType === 'autofill' && camera === false && (
+        <View>
+          {valuesBeforeCamera && valuesBeforeCamera[formikKey] ? (
+            <AutoFill
+              parameter={data.parameter}
+              formikProps={formikProps}
+              formikKey={formikKey}
+              scrollViewScroll={scrollViewScroll}
+              setScrollViewScroll={setScrollViewScroll}
+              cameraValue={valuesBeforeCamera[formikKey]}
+            />
+          ) : (
+            <AutoFill
+              parameter={data.parameter}
+              formikProps={formikProps}
+              formikKey={formikKey}
+              scrollViewScroll={scrollViewScroll}
+              setScrollViewScroll={setScrollViewScroll}
+            />
+          )}
+        </View>
+      )}
+      {fieldType === 'geolocation' && camera === false && (
+        <View>
+          {valuesBeforeCamera && valuesBeforeCamera[formikKey] ? (
+            <Button mode="contained" onPress={() => handleLocation()}>
+              <Text>{location}</Text>
             </Button>
-          ))}
-        </View>
-      )}
-      {fieldType === 'autofill' && (
-        <View>
-          <AutoFill
-            parameter={data.parameter}
-            formikProps={formikProps}
-            formikKey={formikKey}
-            scrollViewScroll={scrollViewScroll}
-            setScrollViewScroll={setScrollViewScroll}
-          />
-        </View>
-      )}
-      {fieldType === 'geolocation' && (
-        <View>
-          <Button mode="contained" onPress={() => handleLocation()}>
-            <Text>{location}</Text>
-          </Button>
+          ) : (
+            <Button mode="contained" onPress={() => handleLocation()}>
+              <Text>{location}</Text>
+            </Button>
+          )}
         </View>
       )}
       {fieldType === 'photo' && (
@@ -91,11 +151,11 @@ const PaperInputPicker = ({
             <UseCamera
               formikProps={formikProps}
               formikKey={formikKey}
+              setCamera={setCamera}
             />
-          )
-            : (
-              <Button mode="outlined" onPress={() => setCamera(true)}>Take Photo</Button>
-            )}
+          ) : (
+            <Button mode="outlined" onPress={() => changeToCamera()}>Take Photo</Button>
+          )}
         </View>
       )}
     </>

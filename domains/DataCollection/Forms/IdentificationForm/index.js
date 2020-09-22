@@ -47,75 +47,81 @@ const IdentificationForm = ({
 
   const [inputs, setInputs] = useState({});
   const [photoFile, setPhotoFile] = useState('State Photo String');
+  const [camera, setCamera] = React.useState(false);
 
   useEffect(() => {
     setInputs(configArray);
   }, [setInputs, configArray]);
 
   return (
-    <Formik
-      initialValues={{}}
-      onSubmit={(values, actions) => {
-        setPhotoFile(values.photo);
+    <View>
+      <Formik
+        initialValues={{}}
+        onSubmit={(values, actions) => {
+          setPhotoFile(values.photo);
 
-        const submitAction = () => {
-          setTimeout(() => {
-            setSelectedForm('');
-            actions.setSubmitting(false);
-          }, 1000);
-        };
-        // const test = values.test.split('Camera/')
-        // // 'data:image/jpeg;base64,' +
-        // const image = values.test;
-        const photo = values.photo
-        delete values.photo
-        const postParams = {
-          parseClass: 'SurveyData',
-          signature: 'Sample Signature',
-          photoFile: photo,
-          localObject: values
-        };
-        console.log("PostParams: ", postParams)
+          const submitAction = () => {
+            setTimeout(() => {
+              setSelectedForm('');
+              actions.setSubmitting(false);
+            }, 1000);
+          };
+          // const test = values.test.split('Camera/')
+          // // 'data:image/jpeg;base64,' +
+          // const image = values.test;
+          const { photo } = values;
+          delete values.photo;
+          const postParams = {
+            parseClass: 'SurveyData',
+            signature: 'Sample Signature',
+            photoFile: photo,
+            localObject: values
+          };
+          console.log('PostParams: ', postParams);
 
-        checkOnlineStatus().then((connected) => {
-          if (connected) {
-            postObjectsToClass(postParams).then(() => {
-              console.log("success", postParams)
+          checkOnlineStatus().then((connected) => {
+            if (connected) {
+              postObjectsToClass(postParams).then(() => {
+                console.log('success', postParams);
+                submitAction();
+              });
+            } else {
+              const id = `PatientID-${generateRandomID()}`;
+              storeData(postParams, id);
               submitAction();
-            });
-          } else {
-            const id = `PatientID-${generateRandomID()}`;
-            storeData(postParams, id);
-            submitAction();
-          }
-        });
-      }}
-    // validationSchema={validationSchema}
-    >
-      {(formikProps) => (
-        <View style={layout.formContainer}>
-          {inputs.length && inputs.map((result) => (
-            <View key={result.formikKey}>
-              <PaperInputPicker
-                data={result}
-                formikProps={formikProps}
-                scrollViewScroll={scrollViewScroll}
-                setScrollViewScroll={setScrollViewScroll}
-              // placeholder="Ana"
-              />
-            </View>
-          ))}
+            }
+          });
+        }}
+      // validationSchema={validationSchema}
+      >
+        {(formikProps) => (
+          <View style={layout.formContainer}>
+            {inputs.length && inputs.map((result) => (
+              <View key={result.formikKey}>
+                <PaperInputPicker
+                  data={result}
+                  formikProps={formikProps}
+                  scrollViewScroll={scrollViewScroll}
+                  setScrollViewScroll={setScrollViewScroll}
+                  camera={camera}
+                  setCamera={setCamera}
+                  values={formikProps.values}
+                // placeholder="Ana"
+                />
+              </View>
+            ))}
 
-          {formikProps.isSubmitting ? (
-            <ActivityIndicator />
-          ) : (
+            {formikProps.isSubmitting ? (
+              <ActivityIndicator />
+            ) : (
               <Button onPress={formikProps.handleSubmit}>
                 <Text>Submit</Text>
               </Button>
             )}
-        </View>
-      )}
-    </Formik>
+          </View>
+        )}
+      </Formik>
+    </View>
   );
 };
 

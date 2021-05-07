@@ -46,8 +46,8 @@ function retrieveSignOutFunction() {
 }
 
 function retrieveForgotPasswordFunction(params) {
-  return new Promise((resolve, reject) => {
-    Parse.Cloud.run('forgotPassword', params).then((result) => {
+  return new Promise(async (resolve, reject) => {
+    await Parse.Cloud.run('forgotPassword', params).then((result) => {
       resolve(result);
     }, (error) => {
       reject(error);

@@ -57,7 +57,6 @@ const IdentificationForm = ({
 
             formObject.dob = `${values.Month || '00'}/${values.Day || '00'}/${values.Year || '0000'}`;
 
-            formObject.searchIndex = `${values.fname || ''} ${values.lname || ''}`;
 
             const valuesToPrune = ['Month', 'Day', 'Year', 'location', 'photoFile'];
             valuesToPrune.forEach((value) => {
@@ -79,7 +78,8 @@ const IdentificationForm = ({
             postIdentificationForm(postParams).then((surveyee) => {
               setSurveyee(surveyee);
               submitAction();
-            }, () => {
+            }, (error) => {
+              console.log(error)
               // perhaps an alert to let the user know there was an error
               setSubmitting(false);
             });

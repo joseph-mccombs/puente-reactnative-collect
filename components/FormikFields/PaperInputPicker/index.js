@@ -6,6 +6,7 @@ import {
   Button, Headline,
   TextInput,
 } from 'react-native-paper';
+import { useEffect } from 'react/cjs/react.development';
 
 import I18n from '../../../modules/i18n';
 import { layout, theme } from '../../../modules/theme';
@@ -19,6 +20,7 @@ import {
   styleButton, styles, stylesDefault, stylesPaper, styleX
 } from './index.style';
 import Looper from './Looper';
+import formatPhoneNumber from './Utils';
 
 const PaperInputPicker = ({
   data, formikProps, scrollViewScroll, setScrollViewScroll, surveyingOrganization,
@@ -26,7 +28,7 @@ const PaperInputPicker = ({
   ...rest
 }) => {
   const {
-    label, formikKey, fieldType, sideLabel
+    label, formikKey, fieldType, sideLabel, formatType
   } = data;
 
   const {
@@ -49,6 +51,10 @@ const PaperInputPicker = ({
   const [image, setImage] = React.useState(null);
 
   const [additionalQuestions, setAdditionalQuestions] = React.useState([]);
+
+  useEffect(() => {
+    console.log(values)
+  }, [values])
 
   return (
     <>

@@ -6,10 +6,24 @@ export default function yupValidationPicker(fields) {
   let validationSchema = yup.object().shape({});
   fields.forEach((result) => {
     const {
-      label, formikKey, fieldType, validation, options
+      label, formikKey, fieldType, validation, options, validationRules
     } = result;
     if (validation) {
-      if (fieldType === 'input' || fieldType === 'numberInput' || fieldType === 'select'
+      if (validationRules !== undefined) {
+        console.log("val rles active")
+        switch (fieldType) {
+          case "numberInput": {
+            console.log(fieldType, validationRules)
+            const resultSchemaInput = {};
+            resultSchemaInput[formikKey] = yup.string().label(I18n.t(label)).required().max(validationRules.maxLength).min(validationRules.minLength);
+            const resultObjectInput = yup.object().shape(resultSchemaInput);
+            validationSchema = validationSchema.concat(resultObjectInput);
+            break;
+          }
+          default:
+            break;
+        }
+      } else if (fieldType === 'input' || fieldType === 'numberInput' || fieldType === 'select'
         || fieldType === ' autofill') {
         const resultSchemaInput = {};
         resultSchemaInput[formikKey] = yup.string().label(I18n.t(label)).required();

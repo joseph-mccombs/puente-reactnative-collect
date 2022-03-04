@@ -82,7 +82,12 @@ const configArray = [
     formikKey: 'telephoneNumber',
     value: '',
     fieldType: 'numberInput',
-    validation: false
+    validation: true,
+    formatType: 'phonenumber',
+    validationRules: {
+      maxLength: 10,
+      minLength: 1
+    }
   },
   {
     label: 'identificationForm.marriageStatus.label',

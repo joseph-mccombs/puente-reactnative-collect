@@ -226,33 +226,40 @@ const configArray = [
     label: 'identificationForm.clinicProvider',
     formikKey: 'clinicProvider',
     value: '',
-    fieldType: 'input',
-    validation: false
+    fieldType: 'input'
+  },
+  // {
+  //   label: "Cedula Number",
+  //   formikKey: 'cedulaNumber',
+  //   value: ""
+  // },
+  {
+    label: 'Latitude',
+    formikKey: 'latitude',
+    value: 0,
+    fieldType: 'geolocation'
   },
   {
-    label: 'identificationForm.cedulaNumber',
-    formikKey: 'cedulaNumber',
+    label: 'Longitude',
+    formikKey: 'longitude',
+    value: 0,
+    fieldType: 'geolocation'
+  },
+  {
+    formikKey: 'photo',
     value: '',
-    fieldType: 'input',
-    validation: false
-  },
-  {
-    label: 'identificationForm.location',
-    formikKey: 'location',
-    value: {},
-    fieldType: 'geolocation',
-    validation: false
-  },
-  {
-    label: 'identificationForm.household',
-    fieldType: 'header',
-  },
-  {
-    label: 'identificationForm.household',
-    formikKey: 'householdId',
-    value: '',
-    fieldType: 'household'
+    fieldType: 'photo',
   }
+  // {
+  //   label: "Surveying User",
+  //   formikKey: 'surveyingUser',
+  //   value: "Test"
+  // },
+  // {
+  //   label: "Surveying Organization",
+  //   formikKey: 'surveyingOrganization',
+  //   value: "Test"
+  // },
 ];
 
 export default configArray;

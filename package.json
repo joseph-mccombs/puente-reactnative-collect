@@ -34,7 +34,10 @@
       "!**/node_modules/**",
       "!**/babel.config.js",
       "!**/jest.setup.js"
-    ]
+    ],
+    "moduleNameMapper": {
+      "^parse/react-native$": "parse/node"
+    }
   },
   "dependencies": {
     "@expo/metro-config": "^0.1.64",

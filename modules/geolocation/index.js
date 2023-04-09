@@ -1,4 +1,4 @@
-import selectedENV from "environment";
+import selectedENV from "@app/environment";
 import * as Location from "expo-location";
 
 export default async function getLocation() {

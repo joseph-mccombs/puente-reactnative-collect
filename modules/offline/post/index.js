@@ -5,6 +5,7 @@ import { isEmpty } from "@modules/utils";
 import { Platform } from "react-native";
 
 import checkOnlineStatus from "..";
+import getAWSLogger from "@modules/aws-logging/hook";
 
 const cleanupPostedOfflineForms = async () => {
   await deleteData("offlineIDForms");
@@ -49,6 +50,10 @@ const postOfflineForms = async () => {
     const uploadedForms = await uploadOfflineForms(offlineForms).catch(() => ({
       status: "Error",
     }));
+    getAWSLogger().log({
+      message: "Uploaded offline forms for user",
+      parseUser: user.objectId
+    });
     return {
       offlineForms,
       uploadedForms,

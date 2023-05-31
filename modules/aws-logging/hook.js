@@ -1,7 +1,18 @@
 import { CloudWatchLogsClient, CreateLogStreamCommand, PutLogEventsCommand } from "@aws-sdk/client-cloudwatch-logs"
 import { useRef } from "react"
+import selectedENV from "@app/environment";
 
-const useLogger = ({ logGroupName, logStreamName, region, accessKeyId, secretAccessKey }) => {
+// The below imports are added to support AWS SDK in React Native.
+// See: https://stackoverflow.com/questions/70413410/error-url-hostname-is-not-implemented-aws-sns-in-react-native-android
+import "react-native-url-polyfill/auto";
+import "react-native-get-random-values";
+
+
+const getAWSLogger = () => {
+
+  const { logGroupName, logStreamName, accessKeyId, secretAccessKey, region } =
+  selectedENV.cloudWatchLogging;
+
   const credentials = {
     accessKeyId,
     secretAccessKey,
@@ -12,38 +23,14 @@ const useLogger = ({ logGroupName, logStreamName, region, accessKeyId, secretAcc
     credentials,
   }
 
-  const persistentLogStreamName = useRef(logStreamName)
-
-  const initalizeLogStream = async (newLogStreamName) => {
-    try {
-      const input = {
-        logGroupName,
-        logStreamName: newLogStreamName,
-      }
-
-      const client = new CloudWatchLogsClient(config)
-
-      const command = new CreateLogStreamCommand(input)
-      const response = await client.send(command)
-
-      persistentLogStreamName.current = newLogStreamName
-      // eslint-disable-next-line
-      console.log(response)
-    } catch (error) {
-      // eslint-disable-next-line
-      console.log(error)
-    }
-  }
-
   const log = async (message) => {
     try {
       // Stringify the message as JSON.
       const jsonMessage = JSON.stringify(message)
-
       const input = {
         logGroupName,
-        logStreamName: persistentLogStreamName.current,
-        logEvents: [{ jsonMessage, timeStamp: new Date() }],
+        logStreamName,
+        logEvents: [{ message: jsonMessage, timestamp: Date.now() }],
       }
 
       const client = new CloudWatchLogsClient(config)
@@ -52,15 +39,17 @@ const useLogger = ({ logGroupName, logStreamName, region, accessKeyId, secretAcc
 
       const response = await client.send(command)
 
-      // eslint-disable-next-line
-      console.log(response)
+      return response;
     } catch (error) {
+      
       // eslint-disable-next-line
       console.log(error)
+
+      return null;
     }
   }
 
-  return { log, initalizeLogStream }
+  return { log };
 }
 
-export default useLogger
+export default getAWSLogger;

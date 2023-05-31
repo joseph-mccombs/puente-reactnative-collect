@@ -9,6 +9,13 @@ const ENV = {
     parseMasterKey: "exampleMasterKey",
     taskyUrlApi: "",
     AWS_LAMBDA_URL: "",
+    cloudWatchLogging: {
+      logGroupName: "puente-test-logs",
+      logStreamName: "test-log-stream",
+      accessKeyId: "",
+      secretAccessKey: "",
+      region: "us-east-1"
+    }
   },
   staging: {
     parseAppId: "exampleAppId",
@@ -17,6 +24,13 @@ const ENV = {
     parseMasterKey: "exampleMasterKey",
     taskyUrlApi: "",
     AWS_LAMBDA_URL: "",
+    cloudWatchLogging: {
+      logGroupName: "puente-test-logs",
+      logStreamName: "test-log-stream",
+      accessKeyId: "",
+      secretAccessKey: "",
+      region: "us-east-1"
+    }
   },
   prod: {
     parseAppId: "exampleAppId",
@@ -25,6 +39,13 @@ const ENV = {
     parseMasterKey: "exampleMasterKey",
     taskyUrlApi: "",
     AWS_LAMBDA_URL: "",
+    cloudWatchLogging: {
+      logGroupName: "puente-test-logs",
+      logStreamName: "test-log-stream",
+      accessKeyId: "",
+      secretAccessKey: "",
+      region: "us-east-1"
+    }
   },
 };
 

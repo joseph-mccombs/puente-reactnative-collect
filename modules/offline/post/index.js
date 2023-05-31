@@ -51,7 +51,7 @@ const postOfflineForms = async () => {
       status: "Error",
     }));
     getAWSLogger().log({
-      message: "Uploaded offline forms for user",
+      type: "OFFLINE_FORM_UPLOADED",
       parseUser: user.objectId
     });
     return {

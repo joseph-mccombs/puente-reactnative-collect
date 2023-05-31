@@ -40,7 +40,6 @@
     }
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "^3.338.0",
     "@expo/metro-config": "^0.1.64",
     "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "~1.17.10",

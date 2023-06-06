@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.5.2](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.4.2...v12.5.2) (2023-06-06)
+
+
+### New Features
+
+* HUGE REFACTOR of imports to consolidate for design system ([c8d9777](https://github.com/hopetambala/puente-reactnative-collect/commit/c8d9777e35aae23277ef90aab5803469965a1ea4))
+
+
+### Bug fixes
+
+* native-base number ([d7c0fe8](https://github.com/hopetambala/puente-reactnative-collect/commit/d7c0fe8225d85d2a7d81ab4546712c62d12ccbf8))
+* remove automatic login ([b8eb1ea](https://github.com/hopetambala/puente-reactnative-collect/commit/b8eb1ea728ab06beccec99573d2d4280e675efe5))
+
 ### [12.5.1](https://github.com/hopetambala/puente-reactnative-collect/compare/v12.4.2...v12.5.1) (2023-03-08)
 
 

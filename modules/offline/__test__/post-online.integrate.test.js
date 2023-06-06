@@ -1,4 +1,5 @@
 import hooks from "@app/test/hooks";
+
 import {
   // postAssetForm, postHousehold,
   // postSupplementaryAssetForm,
@@ -19,6 +20,9 @@ import {
 hooks();
 
 jest.mock("..", () => jest.fn());
+
+// Since full feature testing takes longer than normal we define this timeout to be 10s.
+const FULL_FEATURE_TESTING_TIMEOUT = 10000;
 
 /**
  * Test offline forms uploading with real connection to a Parse Cloud Code
@@ -57,7 +61,7 @@ describe("Testing full feature of online posting", () => {
       (p, form) => p.then(() => postSupplementaryForm(form)), // https://jrsinclair.com/articles/2019/how-to-run-async-js-in-parallel-or-sequential/
       Promise.resolve(null)
     );
-  });
+  }, FULL_FEATURE_TESTING_TIMEOUT);
 
   // test('Testing Resident Forms and Household Forms stored', async () => {
   //   checkOnlineStatus.mockResolvedValue(true);

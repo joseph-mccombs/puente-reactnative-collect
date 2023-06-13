@@ -14,7 +14,7 @@ const checkOnlineStatus = () => {
         (status) => {
           timer.stop();
           getAWSLogger().log({
-            type: "CHECK_ONLINE_STATUS_SUCCESS_TIMER_SECONDS",
+            type: "CHECK_ONLINE_STATUS_SUCCESS_TIMER_SUCCESS",
             seconds: timer.getTimeValues().toString(),
           });
           resolve(status.isConnected);
@@ -39,7 +39,7 @@ const checkOnlineStatus = () => {
           ) {
             timer.stop();
             getAWSLogger().log({
-              type: "CHECK_ONLINE_STATUS_SUCCESS_TIMER_SECONDS",
+              type: "CHECK_ONLINE_STATUS_SUCCESS_TIMER_SUCCESS",
               seconds: timer.getTimeValues().toString(),
             });
             resolve(true);

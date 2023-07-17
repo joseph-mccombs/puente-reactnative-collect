@@ -19,7 +19,7 @@ const checkOnlineStatus = () => {
         (error) => {
           getAWSLogger().log({
             type: "CHECK_ONLINE_STATUS_SUCCESS_TIMER_ERROR",
-            seconds: new Date() - startTime,
+            duration: new Date() - startTime,
           })
           reject(error)
         }

@@ -2,11 +2,7 @@
   "expo": {
     "name": "Collect",
     "slug": "puente-reactnative-collect",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "12.6.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -18,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "buildNumber": "12.6.0",
@@ -36,9 +30,6 @@
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "compileSdkVersion": 33,
-      "targetSdkVersion": 33,
-      "buildToolsVersion": "33.0.0",
       "versionCode": 460120600,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
@@ -75,6 +66,8 @@
       "eas": {
         "projectId": "04cfb8a1-9de3-4228-91d4-d2f43aeaed27"
       }
-    }
+    },
+    "plugins": [
+    ]
   }
 }

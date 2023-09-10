@@ -12,7 +12,6 @@ import React from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 
 import { initialize } from "./services/parse/auth";
-import getAWSLogger from "@modules/aws-logging/logger";
 
 initialize();
 

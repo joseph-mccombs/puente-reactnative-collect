@@ -177,6 +177,7 @@ const IdentificationFormWrapper = ({
 
     try {
       const surveyee = await postIdentificationForm(postParams);
+      setSurveyee(surveyee);
       const { fname, lname } = surveyee;
       alert(`${fname} ${lname}'s ${I18n.t("forms.successfullySubmitted")}`);
       submitAction();

@@ -36,6 +36,9 @@
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
+      "compileSdkVersion": 33,
+      "targetSdkVersion": 33,
+      "buildToolsVersion": "33.0.0",
       "versionCode": 460120600,
       "permissions": [
         "ACCESS_COARSE_LOCATION",

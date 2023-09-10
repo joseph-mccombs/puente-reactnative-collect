@@ -6,10 +6,8 @@ import "react-native-get-random-values";
 import selectedENV from "@app/environment";
 import {
   CloudWatchLogsClient,
-  CreateLogStreamCommand,
   PutLogEventsCommand,
 } from "@aws-sdk/client-cloudwatch-logs";
-import { useRef } from "react";
 
 const getAWSLogger = () => {
   const { logGroupName, logStreamName, accessKeyId, secretAccessKey, region } =

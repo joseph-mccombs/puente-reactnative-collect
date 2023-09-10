@@ -127,8 +127,7 @@ const SupplementaryForm = ({
         };
 
         try {
-          const supplementaryForm = await postSupplementaryForm(postParams);
-          console.log(supplementaryForm);
+          await postSupplementaryForm(postParams);
           alert(` ${I18n.t("forms.successfullySubmitted")}`);
           submitAction();
         } catch (e) {

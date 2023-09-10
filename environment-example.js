@@ -14,8 +14,8 @@ const ENV = {
       logStreamName: "test-log-stream",
       accessKeyId: "",
       secretAccessKey: "",
-      region: "us-east-1"
-    }
+      region: "us-east-1",
+    },
   },
   staging: {
     parseAppId: "exampleAppId",
@@ -29,8 +29,8 @@ const ENV = {
       logStreamName: "test-log-stream",
       accessKeyId: "",
       secretAccessKey: "",
-      region: "us-east-1"
-    }
+      region: "us-east-1",
+    },
   },
   prod: {
     parseAppId: "exampleAppId",
@@ -44,8 +44,8 @@ const ENV = {
       logStreamName: "test-log-stream",
       accessKeyId: "",
       secretAccessKey: "",
-      region: "us-east-1"
-    }
+      region: "us-east-1",
+    },
   },
 };
 

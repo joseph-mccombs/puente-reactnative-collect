@@ -76,8 +76,9 @@ const FormGallery = ({
   };
 
   const pinForm = async (form) => {
-    setPinnedForms([...pinnedForms, form]);
-    storeData(pinnedForms, "pinnedForms");
+    const newPinnedForms = [...pinnedForms, form];
+    setPinnedForms(newPinnedForms);
+    storeData(newPinnedForms, "pinnedForms");
   };
 
   const removePinnedForm = async (form) => {
@@ -172,6 +173,7 @@ const FormGallery = ({
       {Object.keys(workflowData).length > 0 &&
         Object.keys(workflowData).map((key) => (
           <FormsHorizontalView
+            key={key}
             forms={workflowData[key]}
             header={key}
             navigateToCustomForm={navigateToCustomForm}

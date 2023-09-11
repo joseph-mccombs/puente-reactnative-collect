@@ -2,12 +2,8 @@
   "expo": {
     "name": "Collect",
     "slug": "puente-reactnative-collect",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "12.5.1",
+    "platforms": ["ios", "android", "web"],
+    "version": "12.6.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -18,12 +14,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "12.5.1",
+      "buildNumber": "12.6.0",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses your location to geo-tag surveys accurately.",
         "NSCameraUsageDescription": "This app uses photos to identify residents more accurately.",
@@ -36,7 +30,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "android": {
-      "versionCode": 460120501,
+      "versionCode": 460120600,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -72,6 +66,8 @@
       "eas": {
         "projectId": "04cfb8a1-9de3-4228-91d4-d2f43aeaed27"
       }
-    }
+    },
+    "plugins": [
+    ]
   }
 }
